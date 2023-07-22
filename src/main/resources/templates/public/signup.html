@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>E-commerce - Java Spring</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <header class="bg-dark py-3">
+            <div class="container d-flex align-items-center justify-content-between gap-4">
+                <div class="d-flex align-items-center gap-2">
+                    <a th:href="@{/}" class="fs-2 navbar-brand text-white">Spring eCommerce</a>
+                </div>
+            </div>
+        </header>
+        
+        <!-- -->
+        
+        <main class="container-md my-4">
+            <h1 class="text-center mb-4">Registro</h1>
+
+            <div class="py-3 px-4 card m-auto" style="width: 100%; max-width: 30rem;">    
+                <form th:action="@{/signup}" method="POST" th:object="${usuario}">
+                    <p class="mb-4 small text-muted">* Requerido</p>
+
+                    <div class="form mb-3">
+                        <label class="form-label" for="nombre">Nombre *</label>
+                        <input class="form-control" id="nombre" type="text" th:field="*{nombre}" required>
+                        <small class="form-text text-danger" th:errors="*{nombre}"></small>
+                    </div>
+
+                    <div class="form mb-3">
+                        <label class="form-label" for="apellido">Apellido *</label>
+                        <input class="form-control" id="apellido" type="text" th:field="*{apellido}" required>
+                        <small class="form-text text-danger" th:errors="*{apellido}"></small>
+                    </div>
+
+                    <div class="form mb-3">
+                        <label class="form-label" for="email">Email *</label>
+                        <input class="form-control" id="email" type="email" th:field="*{email}" required>
+                        <small class="form-text text-danger" th:errors="*{email}"></small>
+                        <small th:if="${error_emailExists}" class="form-text text-danger">Este email ya está registrado, ¿quieres <a th:href="@{/login}">iniciar sesión</a>?</small>
+                    </div>
+
+                    <div class="form mb-3">
+                        <label class="form-label" for="password">Contraseña *</label>
+                        <input class="form-control" id="password" type="password" th:field="*{password}" required>
+                        <small class="form-text text-danger" th:errors="*{password}"></small>
+                    </div>
+
+                    <div class="form mb-3">
+                        <label class="form-label" for="telefono">Número de teléfono</label>
+                        <input class="form-control" id="telefono" type="text" th:field="*{telefono}">
+                        <small class="form-text text-danger" th:errors="*{telefono}"></small>
+                    </div>
+
+                    <div class="form mb-3">
+                        <label class="form-label" for="direccion">Dirección</label>
+                        <input class="form-control" id="direccion" type="text" th:field="*{direccion}">
+                        <small class="form-text text-danger" th:errors="*{direccion}"></small>
+                    </div>
+
+                    <button type="submit" class="my-2 btn btn-success w-100">Crear cuenta</button>
+                    <a th:href="@{/login}" class="btn btn-outline-primary w-100">Iniciar sesión</a>
+                </form>
+                
+                <!-- <form th:action="@{/signup}" method="POST">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input th:if="${nombre}" type="text" class="form-control" id="nombre" name="nombre" th:value="${nombre}" required>
+                        <input th:unless="${nombre}" type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input th:if="${nombre}" type="text" class="form-control" id="apellido" name="apellido" th:value="${apellido}" required>
+                        <input th:unless="${nombre}" type="text" class="form-control" id="apellido" name="apellido" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input th:if="${email}" type="email" class="form-control" id="email" name="email" th:value="${email}" required>
+                        <input th:unless="${email}"  type="email" class="form-control" id="email" name="email" required>
+                        <div th:if="${error_email}" class="form-text text-danger">Este correo electrónico ya está registrado, ¿deseas <a th:href="@{/login}">iniciar sesión</a>?</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input th:if="${direccion}" th:value=${direccion} type="text" class="form-control" id="direccion" name="direccion" required>
+                        <input th:unless="${direccion}" type="text" class="form-control" id="direccion" name="direccion" required>
+
+                    </div>
+                    
+                    <button type="submit" class="my-2 btn btn-success w-100">Crear cuenta</button>
+                    <a th:href="@{/login}" class="btn btn-outline-primary w-100">Iniciar sesión</a>
+                </form> -->
+            </div>
+        </main>>
+        <!-- -->
+        
+        <footer class="bg-dark text-white py-4">
+            <div class="container">
+                <p class="m-0 text-center">Copyright &COPY; Spring eCommerce 2022</p>   
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="/app.js"></script>
+    </body>
+</html>

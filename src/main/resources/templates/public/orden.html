@@ -1,0 +1,50 @@
+<div th:include="layout::header"></div>
+
+<!-- content -->
+<main class="container">
+    <h3 class="mt-4">Confirmar compra</h3>
+
+    <div class="card my-4">
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="mb-4">
+                        <h4 class="card-title text-uppercase">Datos del comprador</h4>
+                        <h6>Nombre: <span th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></span></h6>
+                        <h6>Correo: <span th:text="${usuario.email}"></span></h6>
+                        <h6>Dirección: <span th:text="${usuario.direccion}"></span></h6>
+                    </div>
+
+                    <h4 class="card-title text-uppercase mb-0">Compra</h4>
+                    <div class="alert alert-light" role="alert">
+                        <table class="table table-bordered">
+                            <caption><span th:text="${cantidadProductos}"></span> producto/s</caption>
+                            <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="item: ${carrito}">
+                                <td th:text="${item.producto.nombre}"></td>
+                                <td th:text="${#numbers.formatDecimal(item.cantidad, 0, 'COMMA', 2, 'POINT')}"></td>
+                                <td th:text="${#numbers.formatDecimal(item.producto.precio, 0, 'COMMA', 2, 'POINT')}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <form th:action="@{/payment/create}" th:object="${carrito}" method="get">
+                        <button type="submit" class="btn btn-primary">Confirmar compra</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- /content -->
+
+<div th:include="layout::footer"></div>
